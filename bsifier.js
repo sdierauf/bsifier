@@ -1,7 +1,12 @@
+//bsifier.js Stefan Dierauf 2013
+//Generates sciency jargon
+
+//binding
 var button = document.getElementById("generate");
 var opener = document.getElementById("opener");
 var jargon = document.getElementById("jargon"); 
 
+//holds openers
 var openerArray = [
 "Have you tried using the...",
 "Surely you would instead use the...",
@@ -11,6 +16,7 @@ var openerArray = [
 "Over at Cern, we've been studying the..."
 ];
 
+//hold's individual jargon elements
 var jargonArray = [
 "Goering ",
 "synthesis ",
@@ -67,6 +73,7 @@ var jargonArray = [
 "diamond "
 ];
 
+//holds 'closers' (specific words that go well at the end of jargon) 
 var closerArray = [
 "constant",
 "coefficient",
@@ -90,8 +97,7 @@ var closerArray = [
 "vortex",
 "paradox"];
 
-function capitaliseFirstLetter(string)
-{
+function capitaliseFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
@@ -99,18 +105,24 @@ Array.prototype.randomElement = function() {
   return this[Math.floor(Math.random() * this.length)];
 };
 
+String.prototype.contains = function(string) {
+  return this.toLowerCase().indexOf(string.toLowerCase() > -1);
+}
+
+//generates the jargon by picking an opener, picking a few unique, random pieces of jargon, 
+//and then picking a closer
 var genJargon = function() {
   opener.innerHTML = openerArray.randomElement();
   var jargonString = capitaliseFirstLetter(jargonArray.randomElement());
   for (var i = 0; i < Math.floor(Math.random() * 3) + 3; i++) {
     var rand = jargonArray.randomElement();
-    while (jargonString.toLowerCase().indexOf(rand.toLowerCase()) > -1) {
+    while (jargonString.contains(rand)) {
       rand = jargonArray.randomElement();
     }
     jargonString += rand;
   }
   var randCloser = closerArray.randomElement();
-  while(jargonString.toLowerCase().indexOf(randCloser.toLowerCase()) > -1) {
+  while(jargonString.contains(randCloser)) {
 	  randCloser = closerArray.randomElement();
   }
   jargon.innerHTML = jargonString + randCloser;
