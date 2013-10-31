@@ -1,0 +1,6 @@
+TODO:
+1. clean up js file, it's kind of spaghetti right now
+2. fix html so bootstrap correctly reflows it in mobile browsers, right
+   now it does nothing. 
+3. create style sheet, style is currently inline right now which is
+   horrendous
